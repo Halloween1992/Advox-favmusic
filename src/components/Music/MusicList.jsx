@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { IoList, IoGrid } from "react-icons/io5";
+import { Trans, useTranslation } from "react-i18next";
 
 import musicContext from "../Store/musicContext";
 import Card from "../UI/Card/Card";
@@ -7,6 +8,10 @@ import MusicItem from "./MusicItem";
 import classes from "./MusicList.module.css";
 
 const MusicList = () => {
+  // This app uses i18Next for translation.
+  // All text data comes from '/i18n.js' file.
+  useTranslation();
+
   const { musicList } = useContext(musicContext);
   const [musicData, setMusicData] = useState([]);
   const [sortValue, setSortValue] = useState("");
@@ -67,14 +72,24 @@ const MusicList = () => {
   return (
     <section>
       <Card className={classes.container__music}>
-        <h1>Music List</h1>
+        <h1>
+          <Trans i18nKey={"list.head"} />
+        </h1>
         <div className={classes.sort__container}>
           <div className={classes.sort__byContent}>
-            <label htmlFor="sort">Sort by</label>
+            <label htmlFor="sort">
+              <Trans i18nKey={"list.sort"} />
+            </label>
             <select name="sort" value={sortValue} onChange={sortHandler}>
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-              <option value="title">Title</option>
+              <option value="newest">
+                <Trans i18nKey={"list.newest"} />
+              </option>
+              <option value="oldest">
+                <Trans i18nKey={"list.oldest"} />
+              </option>
+              <option value="title">
+                <Trans i18nKey={"list.title"} />
+              </option>
               <option value="id">ID</option>
             </select>
           </div>
@@ -110,7 +125,9 @@ const MusicList = () => {
               </div>
             ))}
           {musicList.length <= 0 && (
-            <h4>Your list is empty, start adding one.</h4>
+            <h4>
+              <Trans i18nKey={"list.empty"} />
+            </h4>
           )}
         </ul>
       </Card>

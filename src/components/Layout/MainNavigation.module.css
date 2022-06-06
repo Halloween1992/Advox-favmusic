@@ -16,3 +16,14 @@ header {
   margin: 0;
   cursor: pointer;
 }
+
+button {
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  background-color: var();
+}
+
+.active {
+  background-color: var(--color-primary);
+  color: white;
+}

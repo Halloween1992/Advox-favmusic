@@ -1,12 +1,16 @@
 import MusicForm from "./components/Music/MusicForm";
 import MusicList from "./components/Music/MusicList";
-import Layout from "./components/Layout/Layout";
+
+import MainNavigation from "./components/Layout/MainNavigation";
 function App() {
   return (
-    <Layout>
-      <MusicForm />
-      <MusicList />
-    </Layout>
+    <>
+      <MainNavigation />
+      <div className="container">
+        <MusicForm />
+        <MusicList />
+      </div>
+    </>
   );
 }
 

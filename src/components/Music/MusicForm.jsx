@@ -5,9 +5,14 @@ import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 import Input from "../UI/Input/Input";
 
-const MusicForm = () => {
-  const { addMusic, musicList } = useContext(musicContext);
+import { Trans, useTranslation } from "react-i18next";
 
+const MusicForm = () => {
+  // This app uses i18Next for translation.
+  // All text data comes from '/i18n.js' file.
+  useTranslation();
+
+  const { addMusic, musicList } = useContext(musicContext);
   const [musicTitle, setMusicTitle] = useState("");
   const [isInTheList, setIsInTheList] = useState(false);
   const [hasError, setHassError] = useState(false);
@@ -47,7 +52,10 @@ const MusicForm = () => {
   return (
     <section>
       <Card>
-        <h1>Add Your Favorite Music</h1>
+        <h1>
+          <Trans i18nKey="form.title" />
+        </h1>
+
         <form onSubmit={onFromSubmitHandler}>
           <Input
             type="text"
@@ -55,14 +63,27 @@ const MusicForm = () => {
             onChange={titleInputHandler}
             isValid={hasError || isInTheList}
           />
-          <Button type="submit"> Add to List </Button>
+          <Button type="submit">
+            {" "}
+            <Trans i18nKey="form.button" />
+          </Button>
           <div style={{ marginTop: "1rem" }}>
-            {hasError && <p>Please add a title.</p>}
-            {!hasError && isSending && !isInTheList && (
-              <p>Added to the list.</p>
+            {hasError && (
+              <p>
+                <Trans i18nKey="form.error_msg" />
+              </p>
             )}
+
+            {!hasError && isSending && !isInTheList && (
+              <p>
+                <Trans i18nKey="form.success_msg" />
+              </p>
+            )}
+
             {isInTheList && (
-              <p>{`${musicTitle} - Already exists in the list.`}</p>
+              <p>
+                <Trans i18nKey="form.exists_msg" />
+              </p>
             )}
           </div>
         </form>
